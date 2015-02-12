@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Nombre de la aplicación -->
+    <string name="app_name">Teleasistencia@Tic+</string>
+
+    <!-- LAYOUT: init_splash_screen_logo_teleasistencia -->
+    <string name="init_splash_screen_iniciando_aplicacion">Iniciando aplicación...</string>
+
+    <!-- Cadenas por defecto -->
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_act_main">actMain</string>
+
+</resources>
