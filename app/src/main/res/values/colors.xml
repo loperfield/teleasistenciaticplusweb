@@ -2,6 +2,7 @@
 <resources>
     <item name="white" type="color">#FFFFFFFF</item>
     <item name="black" type="color">#FF000000</item>
+    <item name="grey" type="color">#ff989898</item>
     <item name="azulmagtel" type="color">#FF002526</item>
 
     <item name="blue" type="color">#FF33B5E5</item>

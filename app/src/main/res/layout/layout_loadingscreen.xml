@@ -7,6 +7,14 @@
     android:orientation="vertical">
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/grey"
+        android:textSize="10dp"
+        android:text="@string/version_name"
+        android:layout_gravity="right"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
