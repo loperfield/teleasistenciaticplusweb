@@ -16,9 +16,12 @@
 
     <!-- Activity actMain -->
     <string name="title_activity_act_main">Pantalla inicial</string>
-        <!-- Menus -->
-        <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
-        <string name="menu_actmain_exit_app">Salida</string>
+    <!-- Menus -->
+    <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
+    <string name="menu_actmain_exit_app">Salida</string>
     <!-- Fin cadenas actMain -->
+
+    <string name="title_activity_act_main_debug">Pantalla de depuracion</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

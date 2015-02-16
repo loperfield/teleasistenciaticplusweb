@@ -46,7 +46,7 @@ public class AppLog {
      */
     public void d(String tag, String msg) {
 
-        if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;
         }
 
@@ -64,7 +64,7 @@ public class AppLog {
      */
     public static void e(String tag, String msg) {
 
-        if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;
         }
 
@@ -82,7 +82,7 @@ public class AppLog {
      */
     public static void i(String tag, String msg) {
 
-        if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;
         }
 
@@ -101,7 +101,7 @@ public class AppLog {
 
     public static void v(String tag, String msg) {
 
-        if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;
         }
 
@@ -119,7 +119,7 @@ public class AppLog {
      */
     public static void w(String tag, String msg) {
 
-        if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;
         }
 

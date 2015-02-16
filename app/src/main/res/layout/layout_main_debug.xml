@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+        <TextView style="@style/tex_size_big"
+            android:id="@+id/debug_screen_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pantalla de depuración">
+        </TextView>
+
+    <TextView
+        android:id="@+id/debug_used_memory_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Memoria usada "
+        android:layout_below="@id/debug_screen_title">
+    </TextView>
+
+    <ProgressBar
+        android:id="@+id/debug_progress_bar_used_memory"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/debug_used_memory_label"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:id="@+id/debug_used_memory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@id/debug_progress_bar_used_memory">
+    </TextView>
+
+
+    <TextView
+        android:id="@+id/server_adress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Dirección del servidor "
+        android:layout_below="@id/debug_progress_bar_used_memory">
+    </TextView>
+
+    <EditText
+        android:id="@+id/edit_server_adress"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text=""
+        android:layout_below="@id/server_adress">
+    </EditText>
+
+    <Button
+        android:id="@+id/debug_screen_button_ping"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Comprobar respuesta servidor"
+        android:layout_below="@id/edit_server_adress"
+        android:onClick="main_debug_button_check_online"
+        />
+
+    <Button
+        android:id="@+id/debug_screen_button_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Salida"
+        android:layout_below="@id/debug_screen_button_ping"
+        android:onClick="exit_button"
+        />
+
+</RelativeLayout>

@@ -19,7 +19,15 @@ public interface Constants {
     // MISCELANEA
     ////////////////////////////////////////////////
 
-        public static final long LOADIN_SCREEN_TIME = 3000;
+        public static final long LOADING_SCREEN_TIME = 1000;
+        public static final long MEMORY_DIVIDER = 1048576L; //BytestoMegabytes
+
+        /*
+        1024 bytes      == 1 kilobyte
+        1024 kilobytes  == 1 megabyte
+
+        1024 * 1024     == 1048576*/
+
 
     ////////////////////////////////////////////////
     // SERVIDOR TELEASISTENCIA
@@ -27,5 +35,6 @@ public interface Constants {
 
         public static final String SERVER_PROTOCOL = "http://";
         public static final String SERVER_IP = "127.0.0.1";
+        public static final String SERVER_FILE = "onlinecheck.txt";
 
 }

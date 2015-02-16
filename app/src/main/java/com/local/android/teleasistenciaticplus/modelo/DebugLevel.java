@@ -6,5 +6,5 @@ package com.local.android.teleasistenciaticplus.modelo;
  */
 public enum DebugLevel {
     DEBUG,
-    OFF
+    PRODUCCION
 }

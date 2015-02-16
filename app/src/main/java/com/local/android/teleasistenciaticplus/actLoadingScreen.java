@@ -55,7 +55,7 @@ public class actLoadingScreen extends ActionBarActivity implements Constants{
 
             // Simulate a long loading process on application startup.
             Timer timer = new Timer();
-            timer.schedule(task, Constants.LOADIN_SCREEN_TIME );
+            timer.schedule(task, Constants.LOADING_SCREEN_TIME );
 
     }
 }
