@@ -29,12 +29,22 @@ public class actMain extends ActionBarActivity {
         setContentView(R.layout.layout_main);
     }
 
+    /**
+     * Menu de la aplicación principal
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_act_main, menu);
         return true;
     }
+
+    /**
+     * Menu de la aplicación principal: Pantalla de debug, salida
+     * @return
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -44,8 +54,8 @@ public class actMain extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.menu_actmain_exit_app) {
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

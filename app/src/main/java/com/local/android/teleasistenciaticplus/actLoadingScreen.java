@@ -3,12 +3,11 @@ package com.local.android.teleasistenciaticplus;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
-import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
-import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class actLoadingScreen extends ActionBarActivity implements Constants{
@@ -17,15 +16,46 @@ public class actLoadingScreen extends ActionBarActivity implements Constants{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Creación de la pantalla de carga
+        setContentView(R.layout.layout_loadingscreen);
+
         //Se muestra la pantalla de carga en base a la constante SPLASH_SCREEN
         //el programa entra por la clase Hook, así que la inicialización general
         //no depende de esta pantalla de inicio
 
-        if ( Constants.SPLASH_SCREEN == true ) {
-            setContentView(R.layout.layout_loadingscreen);
-        } else {
-            Intent intent = new Intent(this, actMain.class);
-            startActivity(intent);
-        }
+            /*TextView logText = (TextView) findViewById(R.id.text_init_activity);
+
+            for (int i=0; i<=5 ; i++) {
+                logText.setText(logText.getText() + ".");
+            }*/
+
+            /*Intent intent = new Intent(this, actMain.class);
+            //Inserting delay here
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            startActivity(intent);*/
+
+
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+
+                    // Comenzamos la nueva aplicación
+                    Intent mainIntent;
+                    mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
+                    startActivity(mainIntent);
+
+                    // Cerramos la ventana de carga para que salga del BackStack
+                    finish();
+                }
+            };
+
+            // Simulate a long loading process on application startup.
+            Timer timer = new Timer();
+            timer.schedule(task, Constants.LOADIN_SCREEN_TIME );
+
     }
 }

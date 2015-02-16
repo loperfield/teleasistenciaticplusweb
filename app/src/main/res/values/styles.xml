@@ -12,4 +12,10 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <!-- Tamaño de títulos -->
+    <style name="tex_size_big">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+
 </resources>
