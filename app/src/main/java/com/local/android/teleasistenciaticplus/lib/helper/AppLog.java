@@ -62,7 +62,7 @@ public class AppLog {
      * @param tag clase donde se genera el log
      * @param msg mensaje de log
      */
-    public void e(String tag, String msg) {
+    public static void e(String tag, String msg) {
 
         if (Constants.DEBUG_LEVEL == DebugLevel.OFF) {
             return;
@@ -129,4 +129,5 @@ public class AppLog {
             FileOperation.fileLogWrite(tag, msg);
         }
     }
+
 } // Fin AppLog

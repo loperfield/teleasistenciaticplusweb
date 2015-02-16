@@ -18,7 +18,7 @@ public interface Constants {
         public static final String DEBUG_LOG_FILE = "teleasistencia.log";
 
     ////////////////////////////////////////////////
-    // SERVIDOR
+    // SERVIDOR TELEASISTENCIA
     ////////////////////////////////////////////////
 
         public static final String SERVER_PROTOCOL = "http://";

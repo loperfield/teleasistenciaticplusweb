@@ -15,6 +15,11 @@ import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ *
+ * Actividad principal
+ * - Primera actividad tras la pantalla inicial de carga
+ */
 
 public class actMain extends ActionBarActivity {
 

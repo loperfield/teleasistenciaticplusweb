@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
