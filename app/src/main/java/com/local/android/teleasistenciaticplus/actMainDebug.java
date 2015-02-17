@@ -46,9 +46,6 @@ public class actMainDebug extends ActionBarActivity {
 
     /**
      * Menus de la actividad
-     *
-     * @param menu
-     * @return
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,7 +76,6 @@ public class actMainDebug extends ActionBarActivity {
     /**
      * Pulsar el botón de comprobación online
      *
-     * @param view
      */
     public void main_debug_button_check_online(View view) {
         ////////////////////////////////////////////////////
@@ -89,17 +85,16 @@ public class actMainDebug extends ActionBarActivity {
         //Interfaz
         TextView serverAddress = (TextView) findViewById(R.id.edit_server_adress);
 
-        String urlPorDefecto = Networking.getFullServerAdress();
         String url = serverAddress.getText().toString(); //la introducida en la caja de texto
 
-        if ( url.length() == 0 ) {  //Si la cadena está vacia usamos la url por defecto
+        if (url.length() == 0) {  //Si la cadena está vacia usamos la url por defecto
             serverAddress.setText(Networking.getFullServerAdress());
         }
 
         //Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isOnline();
 
-        if (isNetworkAvailable == true) {
+        if (isNetworkAvailable) {
             //Server online fondo verde
             serverAddress.setBackgroundColor(getResources().getColor(R.color.green));
             //Server offline fondo rojo
@@ -108,25 +103,31 @@ public class actMainDebug extends ActionBarActivity {
         }
 
         //Comprobación de el servidor está disponible (se hace mediante la lectura de un fichero en el mismo)
-        String textRead = null;
-        try{
-            HttpOperations miUrl = new HttpOperations(url);
-            textRead = miUrl.getText();
-        } catch (Exception e) {
-            AppLog.d("actMainDebug","Error leyendo el archivo");
+        //Sólo si existe conexión de internet
+
+        if (isNetworkAvailable) {
+
+            String textRead = null;
+
+            try {
+                HttpOperations miUrl = new HttpOperations(url);
+                textRead = miUrl.getText();
+            } catch (Exception e) {
+                AppLog.d("actMainDebug", "Error leyendo el archivo");
+            }
+
+            String resultado;
+
+            if (textRead == null) {
+                resultado = getResources().getString(R.string.ERROR);
+            } else {
+                resultado = getResources().getString(R.string.CORRECTO);
+            }
+
+            Toast toast1 = Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT);
+
+            toast1.show();
         }
-
-        String resultado;
-
-        if (textRead == null) {
-            resultado = getResources().getString(R.string.ERROR);
-        } else {
-            resultado = getResources().getString(R.string.CORRECTO);
-        }
-
-        Toast toast1 = Toast.makeText(getApplicationContext(),resultado, Toast.LENGTH_SHORT);
-
-        toast1.show();
 
     }
 }

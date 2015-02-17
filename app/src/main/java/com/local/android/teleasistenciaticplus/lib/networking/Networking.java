@@ -3,136 +3,11 @@ package com.local.android.teleasistenciaticplus.lib.networking;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
-import android.util.Log;
 
-import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 import com.local.android.teleasistenciaticplus.modelo.GlobalData;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
-
-/**
- * Created by FESEJU on 11/02/2015.
- */
 public class Networking {
-
-    public static boolean pingAddress(String url) {
-        /////////////////////////////
-        int count = 0;
-        String str = "";
-
-        try {
-
-            Process process = null;
-
-            if (Build.VERSION.SDK_INT <= 16) {
-                // shiny APIS
-                process = Runtime.getRuntime().exec(
-                        "/system/bin/ping -w 1 -c 1 " + url);
-            } else {
-
-                process = new ProcessBuilder()
-                        .command("/system/bin/ping", url)
-                        .redirectErrorStream(true)
-                        .start();
-            }
-
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    process.getInputStream()));
-
-            StringBuffer output = new StringBuffer();
-            String temp;
-
-            while ((temp = reader.readLine()) != null)//.read(buffer)) > 0)
-            {
-                output.append(temp);
-                count++;
-            }
-
-            reader.close();
-
-
-            if (count > 0)
-                str = output.toString();
-
-            process.destroy();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-        AppLog.i("PING Count", "" + count);
-        AppLog.i("PING String", str);
-/////////////////////////////
-        return true;
-    }
-
-    /**
-     * Comprobará si el servidor está respondiendo mediante el intento de lectura de un archivo
-     * //@param url url completamente formada http://127.0.0.1/file.txt
-     * //Debe de ser siempre desde un thread
-     *
-     * @return
-     */
-
-    /*
-    public static String getOnlineUrl(String urlString) {
-        URLConnection feedUrl;
-        try {
-            feedUrl = new URL(urlString).openConnection();
-            InputStream is = feedUrl.getInputStream();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-            StringBuilder sb = new StringBuilder();
-            String line = null;
-
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "");
-            }
-            is.close();
-
-            return sb.toString();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return null;
-    }
-
-    public static void getOnlineUrlLoader() {
-
-        new Thread(new Runnable() {
-            public void run() {
-                String str = Networking.getOnlineUrl("http://127.0.0.1/onlinecheck.txt");
-                Log.e(">>", str);
-            }
-        }).start();
-
-    }
-*/
-    
-    /**
-     * new Thread(new Runnable(){
-     public void run(){
-
-     if(!isNetworkAvailable()){
-     Toast.makeText(getApplicationContext(), getResources().getString(R.string.nointernet), Toast.LENGTH_LONG).show();
-     return;
-     }
-
-     String str=getOnline("http://www.example.com/script.php");
-
-     }
-     }).start();
-     */
 
     /**
      * F8 sirve para activar el emulador
@@ -155,7 +30,18 @@ public class Networking {
         }
     }
 
-    /*
+
+    /**
+     * Crea la dirección completa del servidor
+     *
+     * @return devuelve la cadena completamente formada
+     */
+    public static String getFullServerAdress() {
+        return Constants.SERVER_PROTOCOL + Constants.SERVER_IP + "/" + Constants.SERVER_FILE;
+    }
+}
+
+   /*
     public static boolean isOnline()
     {
         Context mContext = GlobalData.getAppContext();
@@ -260,12 +146,56 @@ public class Networking {
     }
     */
 
-    /**
-     * Crea la dirección completa del servidor
-     *
-     * @return devuelve la cadena completamente formada
-     */
-    public static String getFullServerAdress() {
-        return Constants.SERVER_PROTOCOL + Constants.SERVER_IP + "/" + Constants.SERVER_FILE;
+    /*
+    public static boolean pingAddress(String url) {
+        /////////////////////////////
+        int count = 0;
+        String str = "";
+
+        try {
+
+            Process process = null;
+
+            if (Build.VERSION.SDK_INT <= 16) {
+                // shiny APIS
+                process = Runtime.getRuntime().exec(
+                        "/system/bin/ping -w 1 -c 1 " + url);
+            } else {
+
+                process = new ProcessBuilder()
+                        .command("/system/bin/ping", url)
+                        .redirectErrorStream(true)
+                        .start();
+            }
+
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    process.getInputStream()));
+
+            StringBuffer output = new StringBuffer();
+            String temp;
+
+            while ((temp = reader.readLine()) != null)//.read(buffer)) > 0)
+            {
+                output.append(temp);
+                count++;
+            }
+
+            reader.close();
+
+
+            if (count > 0)
+                str = output.toString();
+
+            process.destroy();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        AppLog.i("PING Count", "" + count);
+        AppLog.i("PING String", str);
+/////////////////////////////
+        return true;
     }
-}
+    */
