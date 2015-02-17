@@ -44,7 +44,7 @@ public class AppLog {
      * @param tag clase donde se genera el log
      * @param msg mensaje de log
      */
-    public void d(String tag, String msg) {
+    public static void d(String tag, String msg) {
 
         if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
             return;

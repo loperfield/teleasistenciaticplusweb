@@ -1,22 +1,21 @@
 package com.local.android.teleasistenciaticplus.lib.networking;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.util.Log;
 
-import com.local.android.teleasistenciaticplus.R;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import com.local.android.teleasistenciaticplus.modelo.GlobalData;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 
 /**
  * Created by FESEJU on 11/02/2015.
@@ -77,10 +76,158 @@ public class Networking {
 
     /**
      * Comprobará si el servidor está respondiendo mediante el intento de lectura de un archivo
-     * @param url url completamente formada http://127.0.0.1/file.txt
+     * //@param url url completamente formada http://127.0.0.1/file.txt
+     * //Debe de ser siempre desde un thread
+     *
      * @return
      */
 
+    /*
+    public static String getOnlineUrl(String urlString) {
+        URLConnection feedUrl;
+        try {
+            feedUrl = new URL(urlString).openConnection();
+            InputStream is = feedUrl.getInputStream();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String line = null;
+
+            while ((line = reader.readLine()) != null) {
+                sb.append(line + "");
+            }
+            is.close();
+
+            return sb.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static void getOnlineUrlLoader() {
+
+        new Thread(new Runnable() {
+            public void run() {
+                String str = Networking.getOnlineUrl("http://127.0.0.1/onlinecheck.txt");
+                Log.e(">>", str);
+            }
+        }).start();
+
+    }
+*/
+    
+    /**
+     * new Thread(new Runnable(){
+     public void run(){
+
+     if(!isNetworkAvailable()){
+     Toast.makeText(getApplicationContext(), getResources().getString(R.string.nointernet), Toast.LENGTH_LONG).show();
+     return;
+     }
+
+     String str=getOnline("http://www.example.com/script.php");
+
+     }
+     }).start();
+     */
+
+    /**
+     * F8 sirve para activar el emulador
+     *
+     * @return si existe conexión o no
+     */
+    public static boolean isOnline() {
+        Context mContext = GlobalData.getAppContext();
+
+        try {
+            ConnectivityManager cm =
+                    (ConnectivityManager) mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            return activeNetwork != null &&
+                    activeNetwork.isAvailable() &&
+                    activeNetwork.isConnected();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /*
+    public static boolean isOnline()
+    {
+        Context mContext = GlobalData.getAppContext();
+
+        try
+        {
+            ConnectivityManager cm = (ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+            return cm.getActiveNetworkInfo().isConnectedOrConnecting();
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }*/
+
+    /*
+    public static boolean checkServerOnline(String url) {
+
+        boolean serverOnline
+
+
+    }*/
+
+    /*
+    public static boolean isHostReachable(String serverAddress, int serverTCPport, int timeoutMS){
+        boolean connected = false;
+        Socket socket;
+        try {
+            socket = new Socket();
+            SocketAddress socketAddress = new InetSocketAddress(serverAddress, serverTCPport);
+            socket.connect(socketAddress, timeoutMS);
+            if (socket.isConnected()) {
+                connected = true;
+                socket.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            socket = null;
+        }
+        return connected;
+    }
+    */
+
+    /* Ejecutar en un thread */
+    /*
+    static public boolean isURLReachable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        if (netInfo != null && netInfo.isConnected()) {
+            try {
+                URL url = new URL("http://192.168.1.13");   // Change to "http://google.com" for www  test.
+                HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+                urlc.setConnectTimeout(10 * 1000);          // 10 s.
+                urlc.connect();
+                if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+                    Log.wtf("Connection", "Success !");
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (MalformedURLException e1) {
+                return false;
+            } catch (IOException e) {
+                return false;
+            }
+        }
+        return false;
+    }
+    */
+
+    /*
     public static boolean ServerOnline(String url) throws IOException {
 
         DefaultHttpClient httpclient = new DefaultHttpClient();
@@ -111,37 +258,14 @@ public class Networking {
             return false; //el server está offline
         }
     }
-
-    /**
-     * Check server online
-     * @param url
-     * @return
-     */
-    public static boolean checkServerOnline(String url) {
-
-        boolean serverOnline;
-
-            if ( Networking.checkServerOnline(url) ) {
-                serverOnline = true;
-            } else {
-                serverOnline = false;
-            }
-
-        if ( serverOnline == true) {
-            return ( true );
-        } else {
-            return ( false );
-        }
-
-    }
-
+    */
 
     /**
      * Crea la dirección completa del servidor
+     *
      * @return devuelve la cadena completamente formada
      */
     public static String getFullServerAdress() {
         return Constants.SERVER_PROTOCOL + Constants.SERVER_IP + "/" + Constants.SERVER_FILE;
     }
-
 }

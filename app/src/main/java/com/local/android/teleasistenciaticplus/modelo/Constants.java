@@ -32,9 +32,12 @@ public interface Constants {
     ////////////////////////////////////////////////
     // SERVIDOR TELEASISTENCIA
     ////////////////////////////////////////////////
-
+/*
         public static final String SERVER_PROTOCOL = "http://";
         public static final String SERVER_IP = "127.0.0.1";
-        public static final String SERVER_FILE = "onlinecheck.txt";
+        public static final String SERVER_FILE = "onlinecheck.txt";*/
 
+    public static final String SERVER_PROTOCOL = "http://";
+    public static final String SERVER_IP = "japones.info";
+    public static final String SERVER_FILE = "index.htm";
 }
