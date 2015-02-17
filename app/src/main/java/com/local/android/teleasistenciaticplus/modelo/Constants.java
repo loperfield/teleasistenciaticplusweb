@@ -13,7 +13,7 @@ public interface Constants {
 
         public static final DebugLevel DEBUG_LEVEL = DebugLevel.DEBUG;
         public static final Boolean LOG_TO_FILE = true;
-        public static final String DEBUG_LOG_FILE = "teleasistencia.log";
+        public static final String DEBUG_LOG_FILE = "teleasistencia.log"; //todo
 
     ////////////////////////////////////////////////
     // MISCELANEA
@@ -32,14 +32,11 @@ public interface Constants {
     ////////////////////////////////////////////////
     // SERVIDOR TELEASISTENCIA
     ////////////////////////////////////////////////
-/*
-        public static final String SERVER_PROTOCOL = "http://";
-        public static final String SERVER_IP = "127.0.0.1";
-        public static final String SERVER_FILE = "onlinecheck.txt";*/
 
-    public static final String SERVER_PROTOCOL = "http://";
-    public static final String SERVER_IP = "japones.info";
-    public static final String SERVER_FILE = "index.htm";
+        public static final String SERVER_PROTOCOL = "http://";
+        public static final String SERVER_IP = "10.0.0.190";
+        public static final String SERVER_FILE = "onlinecheck.txt";
+
 
     //El tiempo que esperamos tras lanzar un thread con una operación HTTP
     public static final int HTTP_OPERATION_DELAY = 1000;

@@ -19,25 +19,9 @@ public class actLoadingScreen extends ActionBarActivity implements Constants{
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
-        //Se muestra la pantalla de carga en base a la constante SPLASH_SCREEN
+        //Se muestra la pantalla de carga
         //el programa entra por la clase Hook, así que la inicialización general
         //no depende de esta pantalla de inicio
-
-            /*TextView logText = (TextView) findViewById(R.id.text_init_activity);
-
-            for (int i=0; i<=5 ; i++) {
-                logText.setText(logText.getText() + ".");
-            }*/
-
-            /*Intent intent = new Intent(this, actMain.class);
-            //Inserting delay here
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            startActivity(intent);*/
-
 
             TimerTask task = new TimerTask() {
                 @Override
@@ -53,9 +37,24 @@ public class actLoadingScreen extends ActionBarActivity implements Constants{
                 }
             };
 
-            // Simulate a long loading process on application startup.
+            // Simulamos un lento proceso de carga
             Timer timer = new Timer();
             timer.schedule(task, Constants.LOADING_SCREEN_TIME );
 
     }
 }
+
+            /*TextView logText = (TextView) findViewById(R.id.text_init_activity);
+
+            for (int i=0; i<=5 ; i++) {
+                logText.setText(logText.getText() + ".");
+            }*/
+
+            /*Intent intent = new Intent(this, actMain.class);
+            //Inserting delay here
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            startActivity(intent);*/
