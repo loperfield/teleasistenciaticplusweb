@@ -15,11 +15,15 @@
     <string name="hello_world">Hello world!</string>
 
     <!-- Activity actMain -->
-    <string name="title_activity_act_main">Pantalla inicial</string>
-    <!-- Menus -->
-    <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
-    <string name="menu_actmain_exit_app">Salida</string>
+        <string name="title_activity_act_main">Pantalla inicial</string>
+        <!-- Menus -->
+        <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
+        <string name="menu_actmain_exit_app">Salida</string>
     <!-- Fin cadenas actMain -->
+
+    <!-- Mensajes de error -->
+        <string name="ERROR">ERROR</string>
+        <string name="CORRECTO">CORRECTO</string>
 
     <string name="title_activity_act_main_debug">Pantalla de depuracion</string>
     <string name="action_settings">Settings</string>

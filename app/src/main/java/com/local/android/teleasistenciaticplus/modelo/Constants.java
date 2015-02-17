@@ -19,7 +19,7 @@ public interface Constants {
     // MISCELANEA
     ////////////////////////////////////////////////
 
-        public static final long LOADING_SCREEN_TIME = 1000;
+        public static final long LOADING_SCREEN_TIME = 2000; //Con 1000 a veces da problemas, no le ha dado tiempo a terminar de ejecutar la lectura del archivo
         public static final long MEMORY_DIVIDER = 1048576L; //BytestoMegabytes
 
         /*
@@ -40,4 +40,7 @@ public interface Constants {
     public static final String SERVER_PROTOCOL = "http://";
     public static final String SERVER_IP = "japones.info";
     public static final String SERVER_FILE = "index.htm";
+
+    //El tiempo que esperamos tras lanzar un thread con una operación HTTP
+    public static final int HTTP_OPERATION_DELAY = 1000;
 }

@@ -2,6 +2,8 @@ package com.local.android.teleasistenciaticplus.lib.networking;
 
 import android.os.SystemClock;
 
+import com.local.android.teleasistenciaticplus.modelo.Constants;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -10,22 +12,37 @@ import java.net.URLConnection;
 
 /**
  * Created by FESEJU on 17/02/2015.
+ * El objetivo de esta clase es obtener el texto de cualquier fichero que aparezca en un servidor http
+ * @input url contiene la ruta completa que intentará leer la clase
+ * @output text devolverá el texto contenido en el fichero leido o null
  */
-public class UrlGetTextRe {
+public class HttpOperations implements Constants {
 
-    private String url;
-    private String text;
+    private String url; //input
+    private String text; //output
 
-    public UrlGetTextRe(String url) {
+    /**
+     * Constructor
+     * @param url
+     */
+    public HttpOperations(String url) {
         this.url = url;
         getOnlineUrlLoader();
     }
 
+    /**
+     * Getter
+     * @return el texto que contiene la url leida o null
+     */
     public String getText() {
-        SystemClock.sleep(1000);
+        SystemClock.sleep(Constants.HTTP_OPERATION_DELAY);
         return this.text;
     }
 
+    /**
+     * El métido que abre una conexión de lectura a la URL y guarda el contenido en text
+     * @return String con el texto leido o null
+     */
     public String getOnlineUrl() {
         URLConnection feedUrl;
         try {
@@ -51,18 +68,20 @@ public class UrlGetTextRe {
     }
 
     /**
-     * Método necesario para llamarlo en un thread
+     * La operación necesita ser llamada en un thread y la llamada la realiza
+     * este metodo. Es necesario usar después un delay para que el valor de text
+     * se propague realmente al text de esta clase. Es la máquina virtual de android
+     * la que decide cuando ejecutar el thread.
      */
-
     public void getOnlineUrlLoader() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                UrlGetTextRe.this.text = getOnlineUrl();
+                HttpOperations.this.text = getOnlineUrl();
             }
 
         }).start();
 
     }
-}
+} //Fin clase HttpOperations

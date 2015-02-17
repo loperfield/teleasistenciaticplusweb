@@ -2,7 +2,6 @@ package com.local.android.teleasistenciaticplus;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,8 +11,8 @@ import android.widget.Toast;
 
 import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
+import com.local.android.teleasistenciaticplus.lib.networking.HttpOperations;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
-import com.local.android.teleasistenciaticplus.lib.networking.UrlGetTextRe;
 
 public class actMainDebug extends ActionBarActivity {
 
@@ -84,17 +83,20 @@ public class actMainDebug extends ActionBarActivity {
      */
     public void main_debug_button_check_online(View view) {
         ////////////////////////////////////////////////////
-        // Comprobación de estado online al servidor
+        // Comprobación de estado online servidor
         ////////////////////////////////////////////////////
+
+        //Interfaz
         TextView serverAddress = (TextView) findViewById(R.id.edit_server_adress);
 
         String urlPorDefecto = Networking.getFullServerAdress();
-        String url = serverAddress.getText().toString(); //la introducidad en la caja de texto
+        String url = serverAddress.getText().toString(); //la introducida en la caja de texto
 
         if ( url.length() == 0 ) {  //Si la cadena está vacia usamos la url por defecto
             serverAddress.setText(Networking.getFullServerAdress());
         }
 
+        //Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isOnline();
 
         if (isNetworkAvailable == true) {
@@ -105,29 +107,27 @@ public class actMainDebug extends ActionBarActivity {
             serverAddress.setBackgroundColor(getResources().getColor(R.color.red));
         }
 
-
-        AppLog.i(">>" , String.valueOf( serverAddress.getText() ) );
-
+        //Comprobación de el servidor está disponible (se hace mediante la lectura de un fichero en el mismo)
         String textRead = null;
         try{
-            UrlGetTextRe miUrl = new UrlGetTextRe(url);
+            HttpOperations miUrl = new HttpOperations(url);
             textRead = miUrl.getText();
         } catch (Exception e) {
             AppLog.d("actMainDebug","Error leyendo el archivo");
         }
 
+        String resultado;
+
         if (textRead == null) {
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "ERROR", Toast.LENGTH_SHORT);
-            toast1.show();
+            resultado = getResources().getString(R.string.ERROR);
         } else {
-            AppLog.d(">>", textRead);
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "OK!", Toast.LENGTH_SHORT);
-            toast1.show();
+            resultado = getResources().getString(R.string.CORRECTO);
         }
+
+        Toast toast1 = Toast.makeText(getApplicationContext(),resultado, Toast.LENGTH_SHORT);
+
+        toast1.show();
+
     }
 }
 
