@@ -12,7 +12,10 @@ import android.widget.Toast;
 import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.lib.networking.HttpOperations;
+import com.local.android.teleasistenciaticplus.lib.networking.HttpRequest;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
+
+import java.util.concurrent.ExecutionException;
 
 public class actMainDebug extends ActionBarActivity {
 
@@ -74,7 +77,42 @@ public class actMainDebug extends ActionBarActivity {
     }
 
     /**
-     * Pulsar el botón de comprobación online
+     * Comprobación online alternativa
+     *
+     * @param view
+     */
+    public void main_debug_button_check_online_alternative(View view) {
+        ////////////////////////////////////////////////////
+        // Comprobación de estado online servidor
+        ////////////////////////////////////////////////////
+
+        //Interfaz
+        TextView serverAddress = (TextView) findViewById(R.id.edit_server_adress);
+
+        String url = serverAddress.getText().toString(); //la introducida en la caja de texto
+
+        if (url.length() == 0) {  //Si la cadena está vacia usamos la url por defecto
+            serverAddress.setText(Networking.getFullServerAdress());
+        }
+
+        // Intentamos obtener una dirección de internet
+        HttpRequest miHttpRequest = new HttpRequest(url);
+        String textRead = miHttpRequest.httpGet();
+
+        String resultado;
+
+        if (textRead == null) {
+            resultado = getResources().getString(R.string.ERROR);
+        } else {
+            resultado = getResources().getString(R.string.CORRECTO);
+        }
+
+        Toast toast1 = Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT);
+        toast1.show();
+    }
+
+    /**
+     * Pulsado el botón de comprobación online
      *
      */
     public void main_debug_button_check_online(View view) {
@@ -91,16 +129,9 @@ public class actMainDebug extends ActionBarActivity {
             serverAddress.setText(Networking.getFullServerAdress());
         }
 
-        //Comprobación de que exista conexión de datos en el teléfono
-        final Boolean isNetworkAvailable = Networking.isOnline();
+        Boolean isNetworkAvailable = Networking.isConnectedToInternet();
 
-        if (isNetworkAvailable) {
-            //Server online fondo verde
-            serverAddress.setBackgroundColor(getResources().getColor(R.color.green));
-            //Server offline fondo rojo
-        } else {
-            serverAddress.setBackgroundColor(getResources().getColor(R.color.red));
-        }
+        showConnectionToInternetInTextBackground(serverAddress); //Indicamos el estado online mediante color rojo o verde
 
         //Comprobación de el servidor está disponible (se hace mediante la lectura de un fichero en el mismo)
         //Sólo si existe conexión de internet
@@ -125,10 +156,30 @@ public class actMainDebug extends ActionBarActivity {
             }
 
             Toast toast1 = Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT);
-
             toast1.show();
         }
 
     }
-}
+
+    /**
+     * Mostramos si hay conexión a internet en el color de fondo de la caja de texto
+     * @param serverAddress
+     */
+
+    private void showConnectionToInternetInTextBackground(TextView serverAddress) {
+        //Comprobación de que exista conexión de datos en el teléfono
+        final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
+
+        if(isNetworkAvailable)
+        {
+            //Server online fondo verde
+            serverAddress.setBackgroundColor(getResources().getColor(R.color.green));
+        }
+        else
+        {
+            //Server offline fondo rojo
+            serverAddress.setBackgroundColor(getResources().getColor(R.color.red));
+        }
+    }
+} // Fin actividadMainDebug
 

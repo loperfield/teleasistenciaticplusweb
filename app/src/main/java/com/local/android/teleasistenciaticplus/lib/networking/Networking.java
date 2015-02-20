@@ -14,7 +14,7 @@ public class Networking {
      *
      * @return si existe conexión o no
      */
-    public static boolean isOnline() {
+    public static boolean isConnectedToInternet() {
         Context mContext = GlobalData.getAppContext();
 
         try {
@@ -42,7 +42,7 @@ public class Networking {
 }
 
    /*
-    public static boolean isOnline()
+    public static boolean isConnectedToInternet()
     {
         Context mContext = GlobalData.getAppContext();
 

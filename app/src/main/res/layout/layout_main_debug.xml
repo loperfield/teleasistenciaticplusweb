@@ -56,13 +56,23 @@
     </EditText>
 
     <Button
-        android:id="@+id/debug_screen_button_ping"
+    android:id="@+id/debug_screen_button_ping"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:text="Comprobar respuesta servidor"
+    android:layout_below="@id/edit_server_adress"
+    android:onClick="main_debug_button_check_online"
+    />
+
+    <Button
+        android:id="@+id/debug_screen_button_ping_alternative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Comprobar respuesta servidor"
-        android:layout_below="@id/edit_server_adress"
-        android:onClick="main_debug_button_check_online"
+        android:text="Comprobar respuesta servidor alternative"
+        android:layout_below="@id/debug_screen_button_ping"
+        android:onClick="main_debug_button_check_online_alternative"
         />
 
     <Button
@@ -70,7 +80,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Salida"
-        android:layout_below="@id/debug_screen_button_ping"
+        android:layout_below="@id/debug_screen_button_ping_alternative"
         android:onClick="exit_button"
         />
 

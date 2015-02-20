@@ -21,6 +21,4 @@ public class Presenter {
 
         return context;
     }
-
-
 }

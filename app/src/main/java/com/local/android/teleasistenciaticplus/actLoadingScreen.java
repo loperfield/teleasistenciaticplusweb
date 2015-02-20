@@ -1,16 +1,17 @@
 package com.local.android.teleasistenciaticplus;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
+import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class actLoadingScreen extends ActionBarActivity implements Constants{
+public class actLoadingScreen extends ActionBarActivity implements Constants {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,42 +20,38 @@ public class actLoadingScreen extends ActionBarActivity implements Constants{
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
-        //Se muestra la pantalla de carga
-        //el programa entra por la clase Hook, así que la inicialización general
-        //no depende de esta pantalla de inicio
+        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de
+        // 1. Tenemos conexión de datos
+        // 2. Hay comunicación con el servidor
+        // 3. EL usuario tiene acceso a la aplicación //TODO como identificamos a un usuario?
 
-            TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
 
-                    // Comenzamos la nueva aplicación
-                    Intent mainIntent;
-                    mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
-                    startActivity(mainIntent);
+        //Comprobación de que exista conexión de datos en el teléfono
+        final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
 
-                    // Cerramos la ventana de carga para que salga del BackStack
-                    finish();
-                }
-            };
+        if (isNetworkAvailable == false) {
 
-            // Simulamos un lento proceso de carga
-            Timer timer = new Timer();
-            timer.schedule(task, Constants.LOADING_SCREEN_TIME );
+        }
+
+
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+
+                // Comenzamos la nueva aplicación
+                Intent mainIntent;
+                mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
+                startActivity(mainIntent);
+
+                // Cerramos la ventana de carga para que salga del BackStack
+                finish();
+            }
+        };
+
+        // Simulamos un lento proceso de carga
+        Timer timer = new Timer();
+        timer.schedule(task, Constants.LOADING_SCREEN_TIME);
 
     }
 }
 
-            /*TextView logText = (TextView) findViewById(R.id.text_init_activity);
-
-            for (int i=0; i<=5 ; i++) {
-                logText.setText(logText.getText() + ".");
-            }*/
-
-            /*Intent intent = new Intent(this, actMain.class);
-            //Inserting delay here
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            startActivity(intent);*/

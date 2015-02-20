@@ -13,7 +13,7 @@ public interface Constants {
 
         public static final DebugLevel DEBUG_LEVEL = DebugLevel.DEBUG;
         public static final Boolean LOG_TO_FILE = true;
-        public static final String DEBUG_LOG_FILE = "teleasistencia.log"; //todo
+        public static final String DEBUG_LOG_FILE = "teleasistencia.log"; //TODO implementar que el log escriba en un fichero local
 
     ////////////////////////////////////////////////
     // MISCELANEA

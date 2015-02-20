@@ -22,6 +22,7 @@
         android:layout_weight="4"
         android:src="@drawable/loadingscreen_logo_teleasistencia" />
 
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,20 +33,19 @@
         android:textColor="@color/azulmagtel"
         android:textSize="35sp" />
 
-    <TextView
-        android:id="@+id/text_init_activity"
-        android:layout_width="fill_parent"
+    <ProgressBar
+        android:id="@+id/loadingImage"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:paddingLeft="10dp"
-        android:background="@color/azulmagtel"
-        android:paddingTop="15dp"
-        android:text="@string/init_splash_screen_iniciando_aplicacion" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_init_activity"
+        android:layout_below="@id/loadingImage"
         android:layout_weight="0"
         android:src="@drawable/loadingscreen_funmagtel"
         android:layout_gravity="end"
