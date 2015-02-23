@@ -80,7 +80,6 @@ public class actMainDebug extends ActionBarActivity {
 
     /**
      * Pulsado el botón de comprobación online
-     *
      */
     public void main_debug_button_check_online(View view) {
         ////////////////////////////////////////////////////
@@ -118,9 +117,10 @@ public class actMainDebug extends ActionBarActivity {
 
             if (textRead == null) {
                 resultado = getResources().getString(R.string.ERROR);
+                AppLog.i("actMainDebug", "Error accediendo a la dirección:\"" + url + "\"");
             } else {
                 resultado = getResources().getString(R.string.CORRECTO);
-                AppLog.i("actMainDebug",textRead);
+                AppLog.i("actMainDebug", textRead);
             }
 
             Toast toast1 = Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT);
@@ -131,6 +131,7 @@ public class actMainDebug extends ActionBarActivity {
 
     /**
      * Mostramos si hay conexión a internet en el color de fondo de la caja de texto
+     *
      * @param serverAddress
      */
 
@@ -138,13 +139,10 @@ public class actMainDebug extends ActionBarActivity {
         //Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
 
-        if(isNetworkAvailable)
-        {
+        if (isNetworkAvailable) {
             //Server online fondo verde
             serverAddress.setBackgroundColor(getResources().getColor(R.color.green));
-        }
-        else
-        {
+        } else {
             //Server offline fondo rojo
             serverAddress.setBackgroundColor(getResources().getColor(R.color.red));
         }

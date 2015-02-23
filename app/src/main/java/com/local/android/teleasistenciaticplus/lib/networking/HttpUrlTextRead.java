@@ -12,7 +12,7 @@ import java.net.URLConnection;
 
 /**
  * Created by FESEJU on 17/02/2015.
- * <p/>
+ *
  * Esta clase maneja distintas operaciones HTTP
  *
  * @input url contiene la ruta completa que intentará leer la clase
