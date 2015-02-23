@@ -12,26 +12,31 @@ import java.net.URLConnection;
 
 /**
  * Created by FESEJU on 17/02/2015.
- * El objetivo de esta clase es obtener el texto de cualquier fichero que aparezca en un servidor http
+ * <p/>
+ * Esta clase maneja distintas operaciones HTTP
+ *
  * @input url contiene la ruta completa que intentará leer la clase
+ *        Por defecto toma el valor de las
  * @output text devolverá el texto contenido en el fichero leido o null
  */
-public class HttpOperations implements Constants {
+public class HttpUrlTextRead implements Constants {
 
     private String url; //input
     private String text; //output
 
     /**
      * Constructor
+     *
      * @param url
      */
-    public HttpOperations(String url) {
+    public HttpUrlTextRead(String url) {
         this.url = url;
-        getOnlineUrlLoader();
+        getUrlTextThread();
     }
 
     /**
      * Getter
+     *
      * @return el texto que contiene la url leida o null
      */
     public String getText() {
@@ -40,10 +45,11 @@ public class HttpOperations implements Constants {
     }
 
     /**
-     * El métido que abre una conexión de lectura a la URL y guarda el contenido en text
+     * El método que abre una conexión de lectura a la URL y guarda el contenido en text
+     *
      * @return String con el texto leido o null
      */
-    public String getOnlineUrl() {
+    public String getUrlText() {
         URLConnection feedUrl;
         try {
             feedUrl = new URL(this.url).openConnection();
@@ -68,20 +74,18 @@ public class HttpOperations implements Constants {
     }
 
     /**
-     * La operación necesita ser llamada en un thread y la llamada la realiza
-     * este metodo. Es necesario usar después un delay para que el valor de text
-     * se propague realmente al text de esta clase. Es la máquina virtual de android
-     * la que decide cuando ejecutar el thread.
+     * La operación necesita un thread y la llamada la realiza este metodo.
+     * Puede ser necesario usar después un delay para que el valor de text
+     * se propague realmente al text de esta clase.
      */
-    public void getOnlineUrlLoader() {
+    public void getUrlTextThread() {
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                HttpOperations.this.text = getOnlineUrl();
+                HttpUrlTextRead.this.text = getUrlText();
             }
 
         }).start();
-
     }
-} //Fin clase HttpOperations
+}

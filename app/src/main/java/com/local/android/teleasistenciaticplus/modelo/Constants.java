@@ -36,8 +36,13 @@ public interface Constants {
         public static final String SERVER_PROTOCOL = "http://";
         public static final String SERVER_IP = "10.0.0.190";
         public static final String SERVER_FILE = "onlinecheck.txt";
+        public static final String SERVER_URL = SERVER_PROTOCOL + SERVER_IP;
+        public static final String SERVER_URL_FILE = SERVER_PROTOCOL + SERVER_IP + "/" + SERVER_FILE;
 
 
-    //El tiempo que esperamos tras lanzar un thread con una operación HTTP
+    ////////////////////////////////////////////////
+    // OPERACIONES HTTP
+    ////////////////////////////////////////////////
     public static final int HTTP_OPERATION_DELAY = 1000;
+    public static final int HTTP_DEFAULT_TRIES = 3; //Intentos de realizar una operación antes de dar error
 }
