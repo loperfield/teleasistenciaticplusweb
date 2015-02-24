@@ -5,10 +5,10 @@ android {
     buildToolsVersion "21.1.2"
     defaultConfig {
         applicationId "com.local.android.teleasistenciaticplus"
-        minSdkVersion 16
+        minSdkVersion 15
         targetSdkVersion 21
         versionCode 1
-        versionName '0.0'
+        versionName '0.1'
     }
     buildTypes {
         release {
