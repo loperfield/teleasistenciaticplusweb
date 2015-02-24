@@ -39,6 +39,7 @@ import com.local.android.teleasistenciaticplus.modelo.DebugLevel;
 
 public class AppLog {
 
+    final static String TAG = "TIC";
     /**
      * Log a DEBUG
      * @param tag clase donde se genera el log
@@ -55,6 +56,10 @@ public class AppLog {
         if (Constants.LOG_TO_FILE == true) {
             FileOperation.fileLogWrite(tag, msg);
         }
+    }
+
+    public static void d(String msg) {
+        d(TAG, msg);
     }
 
     /**
