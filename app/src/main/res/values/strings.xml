@@ -2,11 +2,11 @@
 <resources>
 
     <!-- Nombre de la aplicación -->
-    <string name="app_name">Teleasistencia@Tic+</string>
+    <string name="app_name">Teleasistenci@Tic+</string>
 
     <!-- Versión de la aplicación -->
     <string name="version_code">0</string>
-    <string name="version_name">Ver. 0.0 Alpha (0) build</string>
+    <string name="version_name">Ver. 0.1 Alpha (1) build</string>
 
     <!-- LAYOUT: init_splash_screen_logo_teleasistencia -->
     <string name="init_splash_screen_iniciando_aplicacion">Iniciando aplicación</string>
@@ -24,6 +24,16 @@
     <!-- Mensajes de error -->
         <string name="ERROR">ERROR</string>
         <string name="CORRECTO">CORRECTO</string>
+
+    <!-- Mensajes de alerta -->
+        <!-- Genéricos -->
+        <string name="close_window">Cerrar</string>
+
+        <!--Comprobación de conexión -->
+        <string name="check_internet_conn_title">Conexión al Servidor</string>
+        <string name="check_internet_conn_error">Error de Conexión</string>
+        <string name="check_internet_conn_ok">Conexión realizada</string>
+        <string name="check_internet_conn_retry">Reintentar</string>
 
     <string name="title_activity_act_main_debug">Pantalla de depuracion</string>
     <string name="action_settings">Settings</string>

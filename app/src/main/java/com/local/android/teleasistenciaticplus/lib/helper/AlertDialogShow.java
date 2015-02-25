@@ -14,8 +14,7 @@ import android.os.Bundle;
  * Dependiendo de TipoDialogo mostrará 1, 2 ó 3 botones.
  * Implementa un interface para gestionar los clicks del usuario desde
  * la actividad que la llama (host). De esta forma se personaliza dinámicamente las acciones que
- * debe llevar a cabo cada botón.
- *
+ * debe realizar cada botón.
  */
 public class AlertDialogShow extends DialogFragment {
 
@@ -66,10 +65,10 @@ public class AlertDialogShow extends DialogFragment {
         //Determinamos el número de botones del diálogo
         switch (tipoDialogo){
             case ONE:
-                builder.setPositiveButton(this.labelOk, new DialogInterface.OnClickListener() {
+                builder.setNeutralButton(this.labelNeutral, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Send the positive button event back to the host activity
-                        mListener.onDialogPositiveClick(AlertDialogShow.this);
+                        // Acción a realizar: ninguna
+                        mListener.onDialogNeutralClick(AlertDialogShow.this);
                     }
                 });
                 break;

@@ -1,5 +1,6 @@
 package com.local.android.teleasistenciaticplus;
 
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -7,15 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.local.android.teleasistenciaticplus.lib.helper.AlertDialogShow;
 import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
+import com.local.android.teleasistenciaticplus.lib.helper.TipoDialogo;
 import com.local.android.teleasistenciaticplus.lib.networking.HttpUrlTextRead;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
-public class actMainDebug extends ActionBarActivity {
+public class actMainDebug extends ActionBarActivity
+                            implements AlertDialogShow.NoticeDialogListener {
 
     /**
      * Creación de la actividad de depuración
@@ -123,11 +126,46 @@ public class actMainDebug extends ActionBarActivity {
                 AppLog.i("actMainDebug", textRead);
             }
 
-            Toast toast1 = Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT);
-            toast1.show();
+            /////////
+            //Generación de alerta en pantalla con el resultado de la conexión
+            /////////
+            AlertDialogShow showConnectionResult = new AlertDialogShow();
+            showConnectionResult.setTitulo( getResources().getString(R.string.check_internet_conn_title) );
+            if (resultado.equals( getResources().getString(R.string.ERROR)  )) {
+                showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_error));
+                showConnectionResult.setTipoDialogo(TipoDialogo.TWO);
+            }else {
+                showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_ok));
+                showConnectionResult.setTipoDialogo(TipoDialogo.ONE);
+            }
+
+            showConnectionResult.setLabelCancel(getResources().getString(R.string.close_window));
+            showConnectionResult.setLabelOk(getResources().getString(R.string.check_internet_conn_retry));
+            showConnectionResult.setLabelNeutral(getResources().getString(R.string.close_window));
+
+            showConnectionResult.show(getFragmentManager(), "internetAccessTAG");
         }
+    }
+
+    //Implementamos las acciones de cada botón de la alerta
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        //Reintentar la conexión
 
     }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        //Cerrar la ventana de la alerta
+        finish();
+    }
+
+    @Override
+    public void onDialogNeutralClick(DialogFragment dialog) {
+        //no se implementa
+    }
+
+
 
     /**
      * Mostramos si hay conexión a internet en el color de fondo de la caja de texto
