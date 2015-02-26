@@ -8,6 +8,7 @@ import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
  * Created by FESEJU on 11/02/2015.
  * - HOOK que se ejecutara en primer lugar, incluso antes que la actividad principal.
  * Lo usaremos para operaciones iniciales, como por ejemplo guardar el contexto de la aplicación
+ *
  */
 
 public class Hook extends Application {
