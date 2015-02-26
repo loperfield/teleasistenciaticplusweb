@@ -49,5 +49,5 @@ public interface Constants {
     // OPERACIONES HTTP
     ////////////////////////////////////////////////
     public static final int HTTP_OPERATION_DELAY = 1000;
-    public static final int HTTP_DEFAULT_TRIES = 3; //Intentos de realizar una operación antes de dar error
+    public static final int HTTP_DEFAULT_TRIES = 3; //Intentos de realizar una operación antes de dar error TODO
 }
