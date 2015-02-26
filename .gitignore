@@ -31,6 +31,5 @@ Thumbs.db
 #.gradle
 build/
 
-
 #Everyone has secrets
 app/src/main/java/com/local/android/modelo/SecretKey.java

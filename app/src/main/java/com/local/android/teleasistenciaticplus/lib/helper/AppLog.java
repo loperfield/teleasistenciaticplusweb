@@ -51,16 +51,16 @@ public class AppLog {
             return;
         }
 
-        Log.d(tag, msg);
+        Log.d(">>"+tag+"<<", msg);
 
-        if (Constants.LOG_TO_FILE == true) {
+        if (Constants.LOG_TO_FILE) {
             FileOperation.fileLogWrite(tag, msg);
         }
     }
 
     /**
      * Función con la firma de parámetros simplificada
-     * @param msg
+     * @param msg mensaje de log
      */
     public static void d(String msg) {
         d(TAG, msg);
@@ -77,9 +77,31 @@ public class AppLog {
             return;
         }
 
-        Log.e(tag, msg);
+        Log.e(">>"+tag+"<<", msg);
 
-        if (Constants.LOG_TO_FILE == true) {
+        if (Constants.LOG_TO_FILE) {
+            FileOperation.fileLogWrite(tag, msg);
+        }
+    }
+
+    /**
+     * Log a ERROR with Exception
+     * @param tag lugar donde se produce el log
+     * @param msg mensaje de log
+     * @param e Exception
+     */
+    public static void e(String tag, String msg, Exception e) {
+
+        if (Constants.DEBUG_LEVEL == DebugLevel.PRODUCCION) {
+            return;
+        }
+
+        msg = msg + "\n" + e.getMessage();
+        Log.e(">>"+tag+"<<", msg);
+        e.printStackTrace();
+
+
+        if (Constants.LOG_TO_FILE ) {
             FileOperation.fileLogWrite(tag, msg);
         }
     }
@@ -97,7 +119,7 @@ public class AppLog {
 
         Log.i(tag, msg);
 
-        if (Constants.LOG_TO_FILE == true) {
+        if (Constants.LOG_TO_FILE ) {
             FileOperation.fileLogWrite(tag, msg);
         }
     }
@@ -114,9 +136,9 @@ public class AppLog {
             return;
         }
 
-        Log.v(tag, msg);
+        Log.v(">>"+tag+"<<", msg);
 
-        if (Constants.LOG_TO_FILE == true) {
+        if (Constants.LOG_TO_FILE) {
             FileOperation.fileLogWrite(tag, msg);
         }
     }
@@ -132,9 +154,9 @@ public class AppLog {
             return;
         }
 
-        Log.w(tag, msg);
+        Log.w(">>"+tag+"<<", msg);
 
-        if (Constants.LOG_TO_FILE == true) {
+        if (Constants.LOG_TO_FILE) {
             FileOperation.fileLogWrite(tag, msg);
         }
     }

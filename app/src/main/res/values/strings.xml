@@ -24,6 +24,7 @@
     <!-- Mensajes de error -->
         <string name="ERROR">ERROR</string>
         <string name="CORRECTO">CORRECTO</string>
+        <string name="error_empty_string">Error: cadena vacía</string>
 
     <!-- Mensajes de alerta -->
         <!-- Genéricos -->
