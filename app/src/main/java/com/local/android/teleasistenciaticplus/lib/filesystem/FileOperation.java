@@ -7,6 +7,7 @@ public class FileOperation {
 
     public static void fileLogWrite(String tag, String msg) {
         //Escribimos el log al fichero
+        //TODO
     }
 
 }

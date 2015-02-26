@@ -58,6 +58,10 @@ public class AppLog {
         }
     }
 
+    /**
+     * Función con la firma de parámetros simplificada
+     * @param msg
+     */
     public static void d(String msg) {
         d(TAG, msg);
     }
