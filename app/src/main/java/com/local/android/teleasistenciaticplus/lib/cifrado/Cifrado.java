@@ -31,6 +31,7 @@ public class Cifrado implements SecretKey {
     //Initialization Vector (se pasa en cada mensaje, no es secreto)
     //gracias al vector de inicialización se reducen las posibilidades de hacer
     //ingeniería clásica de rotura de claves al evitar el XOR de resultados
+    //comentario
 
     private String iv = "kxp5j29vn4d8e0sq"; //16 caracteres (16 x 8, 128bits)
     private IvParameterSpec ivspec;
