@@ -1,6 +1,5 @@
 package com.local.android.teleasistenciaticplus;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -14,13 +13,11 @@ import com.local.android.teleasistenciaticplus.lib.cifrado.Cifrado;
 import com.local.android.teleasistenciaticplus.lib.helper.AlertDialogShow;
 import com.local.android.teleasistenciaticplus.lib.helper.AppInfo;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
-import com.local.android.teleasistenciaticplus.lib.helper.TipoDialogo;
 import com.local.android.teleasistenciaticplus.lib.networking.HttpUrlTextRead;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
-public class actMainDebug extends ActionBarActivity
-                            implements AlertDialogShow.NoticeDialogListener {
+public class actMainDebug extends ActionBarActivity {
 
     /**
      * Creación de la actividad de depuración
@@ -136,17 +133,12 @@ public class actMainDebug extends ActionBarActivity
 
             if (resultado.equals( getResources().getString(R.string.ERROR)  )) {
                 showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_error));
-                showConnectionResult.setTipoDialogo(TipoDialogo.TWO);
             }else {
                 showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_ok));
-                showConnectionResult.setTipoDialogo(TipoDialogo.ONE);
             }
-
-            showConnectionResult.setLabelCancel(getResources().getString(R.string.close_window));
-            showConnectionResult.setLabelOk(getResources().getString(R.string.check_internet_conn_retry));
             showConnectionResult.setLabelNeutral(getResources().getString(R.string.close_window));
-
             showConnectionResult.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
         }
     }
 
@@ -204,28 +196,7 @@ public class actMainDebug extends ActionBarActivity
         AppLog.i(">>actMainDebug<< texto descrifrado",descifrado);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////
-    //Implementamos las acciones de cada botón de la alerta
-    //Es necesario que estén definidas para evitar una excepción en AlertDialogShow.java
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        //Reintentar la conexión
-        //Pendiente de implementar fuera de actMainDebug
 
-    }
-
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        //Cerrar la ventana de la alerta
-        //Pendiente de implementar fuera de actMainDebug
-
-    }
-
-    @Override
-    public void onDialogNeutralClick(DialogFragment dialog) {
-        //no se implementa
-        //Pendiente de implementar fuera de actMainDebug
-    }
 
     /**
      * Mostramos si hay conexión a internet en el color de fondo de la caja de texto
