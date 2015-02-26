@@ -206,21 +206,25 @@ public class actMainDebug extends ActionBarActivity
 
     ///////////////////////////////////////////////////////////////////////////////
     //Implementamos las acciones de cada botón de la alerta
+    //Es necesario que estén definidas para evitar una excepción en AlertDialogShow.java
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
         //Reintentar la conexión
+        //Pendiente de implementar fuera de actMainDebug
 
     }
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
         //Cerrar la ventana de la alerta
-        finish();
+        //Pendiente de implementar fuera de actMainDebug
+
     }
 
     @Override
     public void onDialogNeutralClick(DialogFragment dialog) {
         //no se implementa
+        //Pendiente de implementar fuera de actMainDebug
     }
 
     /**
