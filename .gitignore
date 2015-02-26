@@ -32,4 +32,4 @@ Thumbs.db
 build/
 
 #Everyone has secrets
-app/src/main/java/com/local/android/modelo/SecretKey.java
+SecretKey.java
