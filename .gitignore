@@ -36,7 +36,7 @@ SecretKey.java
 # Gradle (no está funcionando bien)
 2.2.1
 .gradle
-.gradle/
+/.gradle
 taskArtifacts
 cache.properties
 cache.properties.lock
