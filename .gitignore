@@ -28,9 +28,19 @@ Thumbs.db
 # Android Studio
 .idea
 #.idea/workspace.xml - remove # and delete .idea if it better suit your needs.
-.gradle
-.gradle/
 build/
 
 #Everyone has secrets
 SecretKey.java
+
+# Gradle (no está funcionando bien)
+2.2.1
+.gradle
+.gradle/
+taskArtifacts
+cache.properties
+cache.properties.lock
+fileHashes.bin
+fileSnapshots.bin
+outputFileStates.bin
+taskArtifacts.bin
