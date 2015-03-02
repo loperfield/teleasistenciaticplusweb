@@ -1,8 +1,5 @@
 package com.local.android.teleasistenciaticplus.lib.filesystem;
 
-import android.util.Log;
-
-import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 import java.io.BufferedWriter;
@@ -25,7 +22,7 @@ public class FileOperation implements Constants {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
             String currentDateandTime = sdf.format(new Date());
 
-            String text = currentDateandTime + " >>" + tag + "<< " + msg;
+            String text = currentDateandTime + tag + "--> " + msg;
 
             File logFile = new File(DEBUG_LOG_FILE);
             //Log.i("Creación de fichero", "fichero creado");

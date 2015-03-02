@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Nombre de la aplicación -->
-    <string name="app_name">Teleasistenci@Tic+</string>
+    <string name="app_name">AATeleasistenci@Tic+</string>
 
     <!-- Versión de la aplicación -->
     <string name="version_code">0</string>
@@ -19,6 +19,19 @@
         <!-- Menus -->
         <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
         <string name="menu_actmain_exit_app">Salida</string>
+
+        <!-- Pantalla principal-->
+        <string name="main_btn_help">AYUDA</string>
+
+        <!-- Mensajes de llamada de auxilio -->
+        <string name="dialer_calling">Conectando con Teleasistencia.\n Espere por favor.</string>
+        <string name="dialer_conected">Conectado. Registrando su petición de auxilio.</string>
+        <string name="dialer_delivered">Su petición de auxilio ha sido registrada.</string>
+        <string name="dialer_closed">Gracias. En breve será atendido/a.</string>
+        <string name="dialer_abort_petition">Cancelar la petición de ayuda.</string>
+        <string name="dialer_abort_confirm">¿Desea cancelar la petición de ayuda?</string>
+        <string name="dialer_abort_aborted">Petición cancelada.</string>
+
     <!-- Fin cadenas actMain -->
 
     <!-- Mensajes de error -->
@@ -30,11 +43,24 @@
         <!-- Genéricos -->
         <string name="close_window">Cerrar</string>
 
-        <!--Comprobación de conexión -->
-        <string name="check_internet_conn_title">Conexión al Servidor</string>
-        <string name="check_internet_conn_error">Error de Conexión</string>
-        <string name="check_internet_conn_ok">Conexión realizada</string>
+        <!--Comprobación de conexión de datos(internet)-->
+        <string name="check_internet_conn_title">Conexión a Internet</string>
+        <string name="check_internet_conn_error">Error de Conexión a Internet</string>
+        <string name="check_internet_conn_ok">Conexión a Internet disponible</string>
         <string name="check_internet_conn_retry">Reintentar</string>
+
+        <!--Comprobación de conexión al Servidor -->
+        <string name="check_server_conn_title">Conexión a Servidor</string>
+        <string name="check_server_conn_error">Error de Conexión</string>
+        <string name="check_server_conn_ok">Conexión realizada</string>
+        <string name="check_server_conn_retry">Reintentar</string>
+
+        <!--Comprobación de usuario registrado -->
+        <string name="check_user_account_title">Login</string>
+        <string name="check_user_account_error">Error de Login</string>
+        <string name="check_user_account_ok">Bienvenid@</string>
+        <string name="check_user_account_retry">Reintentar</string>
+
 
     <string name="title_activity_act_main_debug">Pantalla de depuracion</string>
     <string name="action_settings">Settings</string>

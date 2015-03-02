@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.local.android.teleasistenciaticplus.lib.helper.AlertDialogShow;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
+import com.local.android.teleasistenciaticplus.lib.networking.ServerOperations;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 import java.util.Timer;
@@ -28,8 +30,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
                   WindowManager.LayoutParams.FLAG_FULLSCREEN);
             android.support.v7.app.ActionBar actionBar1 = getSupportActionBar();
             actionBar1.hide();
-            View decorView = getWindow().getDecorView();
-            //Descomentar estas dos líneas si se desea ocultar la barra de navegación
+            //Descomentar estas tres líneas si se desea ocultar la barra de navegación
+            //View decorView = getWindow().getDecorView();
             //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             //decorView.setSystemUiVisibility(uiOptions);
 
@@ -49,38 +51,87 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
-        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de
-        // 1. Tenemos conexión de datos
-        // 2. Hay comunicación con el servidor
-        // 3. EL usuario tiene acceso a la aplicación //TODO como identificamos a un usuario?
+        //TODO: Montar progressbar
 
 
-        //Comprobación de que exista conexión de datos en el teléfono
+        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de conexión
+        // 1. Tenemos conexión de datos?
+        // 2. Hay comunicación con el servidor?
+        // 3. El usuario tiene acceso a la aplicación?
+
+        //Si falla alguna comprobación, salimos de la App
+        Boolean exitApp = false;
+
+        //1. Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
-
         if (isNetworkAvailable == false) {
+            //Si no hay conexión mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
+
+            //Salimos de la app
+            exitApp = true;
+        }
+
+        //2. Comprobación de conexión al servidor
+        final Boolean isServerAvailable = ServerOperations.serverIsOnline();
+        if (isServerAvailable == false) {
+            //Si el servidor no está disponible mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
+
+            //Salimos de la app
+            exitApp = true;
 
         }
 
+        //3. Comprobación de usuario registrado en el sistema
+        final Boolean isUserRegistered = ServerOperations.isRegisteredInServer();
+        if (isUserRegistered == false) {
+            //Si el usuario no está registrado mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_user_account_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_user_account_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
 
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
+            //Salimos de la app
+            exitApp = true;
+        }
 
-                // Comenzamos la nueva aplicación
-                Intent mainIntent;
-                mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
-                startActivity(mainIntent);
+        //TODO: bienvenid@ Mr Marshall
 
-                // Cerramos la ventana de carga para que salga del BackStack
-                finish();
+        if (exitApp) {
+            finish();
+        } else {
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
 
-            }
-        };
+                    // Comenzamos la nueva aplicación
+                    Intent mainIntent;
+                    mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
+                    startActivity(mainIntent);
 
-        // Simulamos un lento proceso de carga
-        Timer timer = new Timer();
-        timer.schedule(task, Constants.LOADING_SCREEN_TIME);
+                    // Cerramos la ventana de carga para que salga del BackStack
+                    finish();
+
+                }
+            };
+
+            // Simulamos un lento proceso de carga
+            Timer timer = new Timer();
+            timer.schedule(task, Constants.LOADING_SCREEN_TIME);
+        }
     }
 }
 
