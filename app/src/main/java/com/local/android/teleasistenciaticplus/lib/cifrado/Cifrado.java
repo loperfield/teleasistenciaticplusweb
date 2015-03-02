@@ -16,14 +16,6 @@ import javax.crypto.spec.SecretKeySpec;
  *
  */
 
-/**
- * Uso
- * Cifrado miCifrado = new Cifrado();
- * String cifrado = Cifrado.bytesToHex( miCifrado.cifrar("Text to Encrypt") );
- *
- * String descifrado = new String( mcrypt.descifrar( encrypted ) );
- */
-
 public class Cifrado implements SecretKey {
 
     static char[] HEX_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
