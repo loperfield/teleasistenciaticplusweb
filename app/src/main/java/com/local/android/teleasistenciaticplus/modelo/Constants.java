@@ -35,7 +35,7 @@ public interface Constants {
 
         public static final String SERVER_PROTOCOL = "http://";
         public static final String SERVER_IP = "10.0.0.190";
-        public static final String SERVER_FILE = "";
+        public static final String SERVER_FILE = "serverstatus";
         public static final String SERVER_URL = SERVER_PROTOCOL + SERVER_IP;
         public static final String SERVER_URL_FILE = SERVER_PROTOCOL + SERVER_IP + "/" + SERVER_FILE;
 
@@ -43,8 +43,6 @@ public interface Constants {
         // Controladores
         ////////////////////////////////////////////////
         public static final String CONTROLLER_CHECK_PHONE = "/phone/check/";
-
-
 
     ////////////////////////////////////////////////
     // OPERACIONES HTTP

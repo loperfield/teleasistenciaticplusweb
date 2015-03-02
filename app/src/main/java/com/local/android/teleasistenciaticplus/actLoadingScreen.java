@@ -51,10 +51,16 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
+        //TODO: Montar progressbar
+
+
         //Se muestra la pantalla de carga y esperamos la comprobación de inicio de conexión
         // 1. Tenemos conexión de datos?
         // 2. Hay comunicación con el servidor?
         // 3. El usuario tiene acceso a la aplicación?
+
+        //Si falla alguna comprobación, salimos de la App
+        Boolean exitApp = false;
 
         //1. Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
@@ -67,9 +73,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
             popup_conn.show(getFragmentManager(), "internetAccessTAG");
             //Fin del mensaje de alerta
 
-            //TODO: no hay conexión a internet
-            finish();
-
+            //Salimos de la app
+            exitApp = true;
         }
 
         //2. Comprobación de conexión al servidor
@@ -83,7 +88,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
             popup_conn.show(getFragmentManager(), "internetAccessTAG");
             //Fin del mensaje de alerta
 
-            //TODO: el servidor no está disponible
+            //Salimos de la app
+            exitApp = true;
 
         }
 
@@ -98,31 +104,34 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
             popup_conn.show(getFragmentManager(), "internetAccessTAG");
             //Fin del mensaje de alerta
 
-            //TODO: el usuario no está registrado en el servidor
-
+            //Salimos de la app
+            exitApp = true;
         }
 
-        //TODO: bienvenid@ --nombre del usuario--
+        //TODO: bienvenid@ Mr Marshall
 
+        if (exitApp) {
+            finish();
+        } else {
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
 
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
+                    // Comenzamos la nueva aplicación
+                    Intent mainIntent;
+                    mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
+                    startActivity(mainIntent);
 
-                // Comenzamos la nueva aplicación
-                Intent mainIntent;
-                mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
-                startActivity(mainIntent);
+                    // Cerramos la ventana de carga para que salga del BackStack
+                    finish();
 
-                // Cerramos la ventana de carga para que salga del BackStack
-                finish();
+                }
+            };
 
-            }
-        };
-
-        // Simulamos un lento proceso de carga
-        Timer timer = new Timer();
-        timer.schedule(task, Constants.LOADING_SCREEN_TIME);
+            // Simulamos un lento proceso de carga
+            Timer timer = new Timer();
+            timer.schedule(task, Constants.LOADING_SCREEN_TIME);
+        }
     }
 }
 

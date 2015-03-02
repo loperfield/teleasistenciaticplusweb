@@ -2,6 +2,7 @@ package com.local.android.teleasistenciaticplus.modelo;
 
 import android.app.Application;
 
+import com.local.android.teleasistenciaticplus.lib.Phone.PhoneData;
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 
 /**
@@ -21,7 +22,7 @@ public class Hook extends Application {
         super.onCreate();
 
         GlobalData.setContext( getApplicationContext() );
-        //GlobalData.setPhoneNumber ();
+        GlobalData.setPhoneNumber(new PhoneData().getNumber());
         AppLog.v("Hook.class", "Hook de aplicación"); //:LOG:
     }
 
