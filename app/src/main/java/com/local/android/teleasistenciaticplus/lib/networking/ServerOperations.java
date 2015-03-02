@@ -55,7 +55,7 @@ public class ServerOperations {
         }
 
         //TODO: conectamos al servidor vía /phone/check/ y recuperamos la respuesta
-        String ConstUrlPhoneCheck = Constants.SERVER_URL + Constants.CONTROLLER_CHECK_PHONE + cifrado +"d";
+        String ConstUrlPhoneCheck = Constants.SERVER_URL + Constants.CONTROLLER_CHECK_PHONE + cifrado;
         String textRead = "";
         try {
             HttpUrlTextRead miUrl = new HttpUrlTextRead(ConstUrlPhoneCheck);
