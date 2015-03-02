@@ -8,7 +8,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.local.android.teleasistenciaticplus.lib.helper.AlertDialogShow;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
+import com.local.android.teleasistenciaticplus.lib.networking.ServerOperations;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 import java.util.Timer;
@@ -28,8 +30,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
                   WindowManager.LayoutParams.FLAG_FULLSCREEN);
             android.support.v7.app.ActionBar actionBar1 = getSupportActionBar();
             actionBar1.hide();
-            View decorView = getWindow().getDecorView();
-            //Descomentar estas dos líneas si se desea ocultar la barra de navegación
+            //Descomentar estas tres líneas si se desea ocultar la barra de navegación
+            //View decorView = getWindow().getDecorView();
             //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             //decorView.setSystemUiVisibility(uiOptions);
 
@@ -49,18 +51,58 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
-        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de
-        // 1. Tenemos conexión de datos
-        // 2. Hay comunicación con el servidor
-        // 3. EL usuario tiene acceso a la aplicación //TODO como identificamos a un usuario?
+        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de conexión
+        // 1. Tenemos conexión de datos?
+        // 2. Hay comunicación con el servidor?
+        // 3. El usuario tiene acceso a la aplicación?
 
-
-        //Comprobación de que exista conexión de datos en el teléfono
+        //1. Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
-
         if (isNetworkAvailable == false) {
+            //Si no hay conexión mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
+
+            //TODO: no hay conexión a internet
+            finish();
 
         }
+
+        //2. Comprobación de conexión al servidor
+        final Boolean isServerAvailable = ServerOperations.serverIsOnline();
+        if (isServerAvailable == false) {
+            //Si el servidor no está disponible mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
+
+            //TODO: el servidor no está disponible
+
+        }
+
+        //3. Comprobación de usuario registrado en el sistema
+        final Boolean isUserRegistered = ServerOperations.isRegisteredInServer();
+        if (isUserRegistered == false) {
+            //Si el usuario no está registrado mostramos alerta en pantalla
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_user_account_title));
+            popup_conn.setMessage(getResources().getString(R.string.check_user_account_error));
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //Fin del mensaje de alerta
+
+            //TODO: el usuario no está registrado en el servidor
+
+        }
+
+        //TODO: bienvenid@ --nombre del usuario--
 
 
         TimerTask task = new TimerTask() {

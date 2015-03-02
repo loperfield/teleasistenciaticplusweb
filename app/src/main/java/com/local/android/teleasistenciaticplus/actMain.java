@@ -1,21 +1,16 @@
 package com.local.android.teleasistenciaticplus;
 
 import android.content.Intent;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
-import com.local.android.teleasistenciaticplus.presentador.Presenter;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
  *
@@ -25,11 +20,27 @@ import java.net.UnknownHostException;
 
 public class actMain extends ActionBarActivity implements Constants {
 
+    //TAG para Log
+    final static String TAG = "actMain: ";
+    //Botón rojo de alarma principal
+    Button tfmRedButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
+        tfmRedButton = (Button) findViewById(R.id.tla_btn);
+        tfmRedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            Toast.makeText(getApplicationContext(), R.string.dialer_calling,Toast.LENGTH_SHORT).show();
+            AppLog.i(TAG, "Llamando a Teleasistencia.");
+            tfmRedButton.setText("CANCELAR AYUDA");
+            tfmRedButton.setBackgroundColor(getResources().getColor(R.color.green));
+            }
+        });
     }
+
 
     /**
      * Menu de la aplicación principal. En base a la constante de depuración

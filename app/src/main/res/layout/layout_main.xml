@@ -17,12 +17,12 @@
 
     <!-- Botón de teleasistencia -->
     <Button
-        android:id="@+id/teleasistencia_btn"
+        android:id="@+id/tla_btn"
         android:layout_below="@id/titulo"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50sp"
 
-        android:text="Ayuda"
+        android:text="@string/main_btn_help"
         android:textColor="#FFFFFF"
         android:textSize="30sp"
 
@@ -33,6 +33,24 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        />
+        android:textStyle="bold"
+        android:longClickable="false"
+        android:enabled="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/calling_text_box"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/tla_btn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:editable="false"
+        android:layout_alignParentBottom="true"
+        android:text="zona de registro de la llamada de auxilio" />
 
 </RelativeLayout>

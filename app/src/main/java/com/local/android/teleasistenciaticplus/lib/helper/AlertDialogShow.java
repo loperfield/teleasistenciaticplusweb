@@ -1,3 +1,9 @@
+/**
+ * Created by GAMO1J on 25/02/2015.
+ *
+ * Clase genérica para mostrar mensajes en en el IU vía AlertDialog.
+ * Sólo mostrará un AlertDialog con un botón.
+ */
 package com.local.android.teleasistenciaticplus.lib.helper;
 
 import android.app.AlertDialog;
@@ -5,13 +11,9 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import com.local.android.teleasistenciaticplus.R;
 
-/**
- * Created by GAMO1J on 25/02/2015.
- *
- * Clase genérica para mostrar mensajes en en el IU vía AlertDialog.
- * Sólo mostrará un AlertDialog con un botón.
- */
+
 public class AlertDialogShow extends DialogFragment {
 
     //Datos de Entrada para la inicialización del dialog
@@ -24,10 +26,18 @@ public class AlertDialogShow extends DialogFragment {
     public AlertDialog onCreateDialog(Bundle savedInstanceState) {
         // Usa la clase constructora para la creación del dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //Definimos el título y el mensaje
+
+        //Aplicamos un estilo al Dialog
+        //LayoutInflater inflater = getActivity().getLayoutInflater();
+        //builder.setView(inflater.inflate(R.layout.popup_dialog, null));
+
+        //Definimos el icono, título y mensaje
+        builder.setIcon(R.drawable.ic_launcher);
         builder.setTitle(this.titulo);
         builder.setMessage(this.Message);
-        //builder.setNeutralButton(this.labelNeutral);
+
+        //Declaramos al acción del botón. Por defecto, al ser una ventana informativa no se
+        //ejecuta ninguna acción concreta
         builder.setNeutralButton(this.labelNeutral, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // No requiere de implementación

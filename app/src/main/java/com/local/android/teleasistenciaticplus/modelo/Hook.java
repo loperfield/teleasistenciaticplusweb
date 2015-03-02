@@ -17,8 +17,12 @@ public class Hook extends Application {
      * Almacenamos el contexto de la aplicación
      */
     public void onCreate(){
+
         super.onCreate();
+
         GlobalData.setContext( getApplicationContext() );
+        //GlobalData.setPhoneNumber ();
         AppLog.v("Hook.class", "Hook de aplicación"); //:LOG:
     }
+
 }

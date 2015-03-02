@@ -128,16 +128,15 @@ public class actMainDebug extends ActionBarActivity {
             /////////
             //Generación de alerta en pantalla con el resultado de la conexión
             /////////
-            AlertDialogShow showConnectionResult = new AlertDialogShow();
-            showConnectionResult.setTitulo( getResources().getString(R.string.check_internet_conn_title) );
-
+            AlertDialogShow popup_conn = new AlertDialogShow();
+            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
             if (resultado.equals( getResources().getString(R.string.ERROR)  )) {
-                showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_error));
+                popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
             }else {
-                showConnectionResult.setMessage(getResources().getString(R.string.check_internet_conn_ok));
+                popup_conn.setMessage(getResources().getString(R.string.check_server_conn_ok));
             }
-            showConnectionResult.setLabelNeutral(getResources().getString(R.string.close_window));
-            showConnectionResult.show(getFragmentManager(), "internetAccessTAG");
+            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
             //Fin del mensaje de alerta
         }
     }
