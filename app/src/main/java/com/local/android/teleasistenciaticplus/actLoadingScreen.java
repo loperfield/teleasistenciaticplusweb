@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.local.android.teleasistenciaticplus.lib.helper.AlertDialogShow;
+import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
 import com.local.android.teleasistenciaticplus.lib.networking.Networking;
 import com.local.android.teleasistenciaticplus.lib.networking.ServerOperations;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
@@ -60,59 +61,28 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
         // 3. El usuario tiene acceso a la aplicación?
 
         //Si falla alguna comprobación, salimos de la App
-        Boolean exitApp = false;
+        int exitApp = 0;
 
         //1. Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
-        if (isNetworkAvailable == false) {
-            //Si no hay conexión mostramos alerta en pantalla
-            AlertDialogShow popup_conn = new AlertDialogShow();
-            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
-            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
-            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
-            popup_conn.show(getFragmentManager(), "internetAccessTAG");
-            //Fin del mensaje de alerta
-
-            //Salimos de la app
-            exitApp = true;
-        }
-
         //2. Comprobación de conexión al servidor
         final Boolean isServerAvailable = ServerOperations.serverIsOnline();
-        if (isServerAvailable == false) {
-            //Si el servidor no está disponible mostramos alerta en pantalla
-            AlertDialogShow popup_conn = new AlertDialogShow();
-            popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
-            popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
-            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
-            popup_conn.show(getFragmentManager(), "internetAccessTAG");
-            //Fin del mensaje de alerta
-
-            //Salimos de la app
-            exitApp = true;
-
-        }
-
         //3. Comprobación de usuario registrado en el sistema
         final Boolean isUserRegistered = ServerOperations.isRegisteredInServer();
-        if (isUserRegistered == false) {
-            //Si el usuario no está registrado mostramos alerta en pantalla
-            AlertDialogShow popup_conn = new AlertDialogShow();
-            popup_conn.setTitulo(getResources().getString(R.string.check_user_account_title));
-            popup_conn.setMessage(getResources().getString(R.string.check_user_account_error));
-            popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
-            popup_conn.show(getFragmentManager(), "internetAccessTAG");
-            //Fin del mensaje de alerta
+        if (isNetworkAvailable == false) {
+            //Si no hay conexión mostramos alerta en pantalla
+           exitApp = 1;
+        } else if (isServerAvailable == false) {
+            //Si el servidor no está disponible mostramos alerta en pantalla
+            exitApp = 2;
 
-            //Salimos de la app
-            exitApp = true;
+        } else if (isUserRegistered == false) {
+            //Si el usuario no está registrado mostramos alerta en pantalla
+            exitApp = 3;
         }
 
-        //TODO: bienvenid@ Mr Marshall
-
-        if (exitApp) {
-            finish();
-        } else {
+        //Si no hay problemas de conexión ni login, continuamos con la carga del botón de ayuda
+        if (exitApp == 0) {
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
@@ -128,6 +98,47 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
                 }
             };
 
+            // Simulamos un lento proceso de carga
+            Timer timer = new Timer();
+            timer.schedule(task, Constants.LOADING_SCREEN_TIME);
+
+
+        } else {
+            AppLog.i("actLoadingScreen -> ", "Fallo de conexión: " + exitApp);
+            //Mostramos ventana de error de conexión y cerramos la app
+            AlertDialogShow popup_conn = new AlertDialogShow();
+
+            //personalizamos el mensaje del Dialog
+            switch (exitApp) {
+
+                case 1:
+                    popup_conn.setTitulo(getResources().getString(R.string.check_internet_conn_title));
+                    popup_conn.setMessage(getResources().getString(R.string.check_internet_conn_error));
+                    popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+                    break;
+
+                case 2:
+                    popup_conn.setTitulo(getResources().getString(R.string.check_server_conn_title));
+                    popup_conn.setMessage(getResources().getString(R.string.check_server_conn_error));
+                    popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+                    break;
+
+                case 3:
+                    popup_conn.setTitulo(getResources().getString(R.string.check_user_account_title));
+                    popup_conn.setMessage(getResources().getString(R.string.check_user_account_error));
+                    popup_conn.setLabelNeutral(getResources().getString(R.string.close_window));
+                    break;
+            }
+            popup_conn.show(getFragmentManager(), "internetAccessTAG");
+            //TODO: Cerrar la APP transcurridos unos segundos
+            TimerTask task = new TimerTask() {
+                @Override
+                public void run() {
+                    // Cerramos la ventana de carga para que salga del BackStack
+                    finish();
+
+                }
+            };
             // Simulamos un lento proceso de carga
             Timer timer = new Timer();
             timer.schedule(task, Constants.LOADING_SCREEN_TIME);

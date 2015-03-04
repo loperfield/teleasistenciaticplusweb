@@ -15,22 +15,24 @@
     <string name="hello_world">Hello world!</string>
 
     <!-- Activity actMain -->
-        <string name="title_activity_act_main">Pantalla inicial</string>
+        <string name="title_activity_act_main">Pantalla inicial - nombre usuario</string>
         <!-- Menus -->
         <string name="menu_actmain_debug_screen">Pantalla de depuración</string>
         <string name="menu_actmain_exit_app">Salida</string>
 
         <!-- Pantalla principal-->
-        <string name="main_btn_help">AYUDA</string>
+        <string name="main_btn_help">AVISO</string>
+        <string name="user_name">Usuario</string>
 
-        <!-- Mensajes de llamada de auxilio -->
+        <!-- Mensajes de llamada de aviso -->
         <string name="dialer_calling">Conectando con Teleasistencia.\n Espere por favor.</string>
-        <string name="dialer_conected">Conectado. Registrando su petición de auxilio.</string>
-        <string name="dialer_delivered">Su petición de auxilio ha sido registrada.</string>
+        <string name="dialer_conected">Conectado. Registrando su petición de aviso.</string>
+        <string name="dialer_delivered">Su petición de aviso ha sido registrada.</string>
         <string name="dialer_closed">Gracias. En breve será atendido/a.</string>
-        <string name="dialer_abort_petition">Cancelar la petición de ayuda.</string>
-        <string name="dialer_abort_confirm">¿Desea cancelar la petición de ayuda?</string>
-        <string name="dialer_abort_aborted">Petición cancelada.</string>
+
+        <string name="dialer_abort_petition">Cancelar el aviso.</string>
+        <string name="dialer_abort_confirm">¿Desea cancelar aviso?</string>
+        <string name="dialer_abort_aborted">Aviso cancelado.</string>
 
     <!-- Fin cadenas actMain -->
 
@@ -51,7 +53,7 @@
 
         <!--Comprobación de conexión al Servidor -->
         <string name="check_server_conn_title">Conexión a Servidor</string>
-        <string name="check_server_conn_error">Error de Conexión</string>
+        <string name="check_server_conn_error">Error de Conexión al Servidor</string>
         <string name="check_server_conn_ok">Conexión realizada</string>
         <string name="check_server_conn_retry">Reintentar</string>
 

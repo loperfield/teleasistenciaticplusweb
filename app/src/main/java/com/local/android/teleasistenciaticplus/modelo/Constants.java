@@ -43,6 +43,7 @@ public interface Constants {
         // Controladores
         ////////////////////////////////////////////////
         public static final String CONTROLLER_CHECK_PHONE = "/phone/check/";
+        public static final String CONTROLLER_USER_NAME = "/phoneuser/name/";
 
     ////////////////////////////////////////////////
     // OPERACIONES HTTP

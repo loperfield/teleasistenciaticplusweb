@@ -17,6 +17,12 @@
     <style name="tex_size_big">
         <item name="android:textSize">30sp</item>
     </style>
+    <style name="tex_size_medium">
+        <item name="android:textSize">20sp</item>
+    </style>
+    <style name="tex_size_small">
+        <item name="android:textSize">12sp</item>
+    </style>
 
     <!-- Divisores -->
     <style name="Divider">

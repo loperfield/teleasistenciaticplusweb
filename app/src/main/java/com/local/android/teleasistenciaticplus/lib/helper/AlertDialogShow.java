@@ -1,9 +1,3 @@
-/**
- * Created by GAMO1J on 25/02/2015.
- *
- * Clase genérica para mostrar mensajes en en el IU vía AlertDialog.
- * Sólo mostrará un AlertDialog con un botón.
- */
 package com.local.android.teleasistenciaticplus.lib.helper;
 
 import android.app.AlertDialog;
@@ -13,6 +7,12 @@ import android.os.Bundle;
 
 import com.local.android.teleasistenciaticplus.R;
 
+/**
+ * Created by GAMO1J on 25/02/2015.
+ *
+ * Clase genérica para mostrar mensajes en en el IU vía AlertDialog.
+ * Sólo mostrará un AlertDialog con un botón.
+ */
 
 public class AlertDialogShow extends DialogFragment {
 

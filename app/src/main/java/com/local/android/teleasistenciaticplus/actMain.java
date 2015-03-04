@@ -1,6 +1,8 @@
 package com.local.android.teleasistenciaticplus;
 
+import android.app.ActionBar;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.local.android.teleasistenciaticplus.lib.helper.AppLog;
+import com.local.android.teleasistenciaticplus.lib.networking.ServerOperations;
 import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 /**
@@ -20,23 +23,31 @@ import com.local.android.teleasistenciaticplus.modelo.Constants;
 
 public class actMain extends ActionBarActivity implements Constants {
 
-    //TAG para Log
+    //TAG para AppLog
     final static String TAG = "actMain: ";
     //Botón rojo de alarma principal
     Button tfmRedButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
+
+        //Recuperamos el nombre del usuario y lo ponemos en el ActionBar
+        setActionBarWithUserName();
+
+        //Capturamos la pulsación del botón de Aviso
         tfmRedButton = (Button) findViewById(R.id.tla_btn);
         tfmRedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), R.string.dialer_calling,Toast.LENGTH_SHORT).show();
-            AppLog.i(TAG, "Llamando a Teleasistencia.");
-            tfmRedButton.setText("CANCELAR AYUDA");
-            tfmRedButton.setBackgroundColor(getResources().getColor(R.color.green));
+                Toast.makeText(getApplicationContext(), R.string.dialer_calling,Toast.LENGTH_SHORT).show();
+                AppLog.i(TAG, "Llamando a Teleasistencia.");
+                tfmRedButton.setText("CANCELAR AVISO");
+                tfmRedButton.setBackgroundColor(getResources().getColor(R.color.green));
+                
+
             }
         });
     }
@@ -66,7 +77,6 @@ public class actMain extends ActionBarActivity implements Constants {
      * Menu de la aplicación principal: Pantalla de debug, salida
      * @return
      */
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -83,5 +93,30 @@ public class actMain extends ActionBarActivity implements Constants {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Modificación del ActionBar con el nombre del usuario
+     *
+     *
+     * @param
+     * @return
+     */
+    public void setActionBarWithUserName () {
+
+        //Obtenemos del servidor el nombre del usuario asociado a este número de teléfono
+        String userName = ServerOperations.retrieveUserName();
+
+        //SDK API < 16
+        if (Build.VERSION.SDK_INT < 16) {
+            android.support.v7.app.ActionBar actionBar1 = getSupportActionBar();
+            actionBar1.setTitle(userName);
+
+        }else {
+            //SDK API > 16
+            ActionBar actionBar2 = getActionBar();
+            actionBar2.setTitle(userName);
+        }
+
     }
 }
