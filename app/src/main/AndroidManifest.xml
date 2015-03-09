@@ -37,6 +37,7 @@
         <!-- Actividad de carga, MAIN -->
         <activity
             android:name=".actLoadingScreen"
+            android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
             android:relinquishTaskIdentity="true"
             android:screenOrientation="portrait" >
@@ -50,9 +51,14 @@
         <!-- Actividad principal -->
         <activity
             android:name=".actMain"
-            android:label="@string/title_activity_act_main"
-            android:screenOrientation="portrait" >
+            android:icon="@drawable/ic_launcher"
+            android:logo="@drawable/ic_launcher"
+            android:label="Pantalla inicial"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light">
         </activity>
+
+        <!-- Actividad principal Debug -->
         <activity
             android:name=".actMainDebug"
             android:label="@string/title_activity_act_main_debug"

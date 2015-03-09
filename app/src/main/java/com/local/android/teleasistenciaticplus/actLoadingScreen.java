@@ -24,51 +24,46 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Ocultación de StatusBar, ActionBar y NavigationBar
         // SDK API < 16
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                  WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
             android.support.v7.app.ActionBar actionBar1 = getSupportActionBar();
             actionBar1.hide();
-            //Descomentar estas tres líneas si se desea ocultar la barra de navegación
+            //Descomentar estas tres lÃ­neas si se desea ocultar la barra de navegaciÃ³n
             //View decorView = getWindow().getDecorView();
             //int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             //decorView.setSystemUiVisibility(uiOptions);
 
         }else {
-            //SDK API > 16
+            //SDK API >= 16
             View decorView2 = getWindow().getDecorView();
             // Oculta status bar
-            //Para ocultar también el navigation bar quitar la parte comentada
+            //Para ocultar tambiÃ©n el navigation bar quitar la parte comentada
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN; // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             decorView2.setSystemUiVisibility(uiOptions);
-            // Recordar que si se oculta el Status Bar, nunca se debería mostrar el ActionBar
+            // Recordar que si se oculta el Status Bar, nunca se deberÃ­a mostrar el ActionBar
             ActionBar actionBar2 = getActionBar();
             actionBar2.hide();
         }
 
-
         //Creación de la pantalla de carga
         setContentView(R.layout.layout_loadingscreen);
 
-        //TODO: Montar progressbar
 
-
-        //Se muestra la pantalla de carga y esperamos la comprobación de inicio de conexión
-        // 1. Tenemos conexión de datos?
-        // 2. Hay comunicación con el servidor?
-        // 3. El usuario tiene acceso a la aplicación?
-
+        //Comprobación inicial de conexión
         //Si falla alguna comprobación, salimos de la App
         int exitApp = 0;
 
         //1. Comprobación de que exista conexión de datos en el teléfono
         final Boolean isNetworkAvailable = Networking.isConnectedToInternet();
+
         //2. Comprobación de conexión al servidor
         final Boolean isServerAvailable = ServerOperations.serverIsOnline();
+
         //3. Comprobación de usuario registrado en el sistema
         final Boolean isUserRegistered = ServerOperations.isRegisteredInServer();
+
         if (isNetworkAvailable == false) {
             //Si no hay conexión mostramos alerta en pantalla
            exitApp = 1;
@@ -94,7 +89,6 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
 
                     // Cerramos la ventana de carga para que salga del BackStack
                     finish();
-
                 }
             };
 
@@ -102,9 +96,10 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
             Timer timer = new Timer();
             timer.schedule(task, Constants.LOADING_SCREEN_TIME);
 
-
+        //Si hay algún problema de conexión salimos
         } else {
             AppLog.i("actLoadingScreen -> ", "Fallo de conexión: " + exitApp);
+
             //Mostramos ventana de error de conexión y cerramos la app
             AlertDialogShow popup_conn = new AlertDialogShow();
 
@@ -130,7 +125,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
                     break;
             }
             popup_conn.show(getFragmentManager(), "internetAccessTAG");
-            //TODO: Cerrar la APP transcurridos unos segundos
+
+            //Cerramos la APP transcurridos unos segundos
             TimerTask task = new TimerTask() {
                 @Override
                 public void run() {
@@ -145,4 +141,3 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
         }
     }
 }
-

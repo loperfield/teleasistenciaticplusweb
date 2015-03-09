@@ -116,12 +116,123 @@ public class ServerOperations {
     }
 
 
+    /**
+     * Comprueba si hay algún aviso activo para este usuario.
+     * @return true | false
+     */
+
+    public static boolean checkAviso() {
+        //Recuperamos el número de teléfono
+        String pn = GlobalData.getPhoneNumber();
+
+        //Llamamos a la encriptación
+        String cifrado = "";
+        try {
+            cifrado = new Cifrado().cifrar(pn);
+        } catch (Exception e) {
+            AppLog.e("ServerOperations -->", "Problema de cifrado: " + pn, e);
+        }
+
+        //conectamos al servidor vía /aviso/check/ y recuperamos la respuesta
+        String ConstURLCheck = Constants.SERVER_URL + Constants.CONTROLLER_AVISO_CHECK + cifrado;
+        String textRead = "";
+        try {
+            HttpUrlTextRead miUrl = new HttpUrlTextRead(ConstURLCheck);
+            textRead = miUrl.getText();
+        } catch (Exception e) {
+            AppLog.d("ServerOperations -> ", "ERROR Checkeo de aviso");
+        }
+        if (textRead != null) {
+            if (textRead.equals("true")) {
+                AppLog.i("ServerOperations -> ", "Aviso ya estaba activo: " + textRead);
+                return true;
+            } else {
+                AppLog.i("ServerOperations -> ", "No hay avisos activos: " + textRead);
+                return false;
+            }
+        }
+        AppLog.i("ServerOperations -> ", "ERROR texRead = " + textRead);
+        return false;
+    }
+
+    /**
+     * Crea un nuevo aviso en el servidor
+     * @return true | false
+     */
+    public static boolean crearAviso() {
+
+        //Recuperamos el número de teléfono
+        String pn = GlobalData.getPhoneNumber();
+
+        //Llamamos a la encriptación
+        String cifrado = "";
+        try {
+            cifrado = new Cifrado().cifrar(pn);
+        } catch (Exception e) {
+            AppLog.e("ServerOperations -->", "Problema de cifrado: " + pn, e);
+        }
+        String ConstURLCreate = Constants.SERVER_URL + Constants.CONTROLLER_AVISO_CREATE + cifrado;
+        String textRead = "";
+
+        //creamos nuevo aviso
+        try {
+            HttpUrlTextRead miUrl = new HttpUrlTextRead(ConstURLCreate);
+            textRead = miUrl.getText();
+        } catch (Exception e) {
+            AppLog.d("ServerOperations -> ", "Error de conexión??");
+        }
+        if (textRead != null) {
+            if (textRead.equals("true")) {
+                AppLog.i("ServerOperations -> ", "Aviso CREADO: " + textRead);
+                return true;
+            } else {
+                //Toast.makeText(getApplicationContext(), "No hay avisos activos", Toast.LENGTH_SHORT).show();
+                AppLog.i("ServerOperations -> ", "Error creando aviso: " + textRead);
+                return false;
+            }
+        }
+        AppLog.i("ServerOperations -> ", "ERROR texRead = " + textRead);
+        return false;
+    }
 
 
-    //TODO: implementar aviso
-    /*
-    public boolean setAlarm(Alarma miAlarma) {
 
-    }*/
+    public static boolean borrarAviso() {
+
+        //Recuperamos el número de teléfono
+        String pn = GlobalData.getPhoneNumber();
+
+        //Llamamos a la encriptación
+        String cifrado = "";
+        try {
+            cifrado = new Cifrado().cifrar(pn);
+        } catch (Exception e) {
+            AppLog.e("ServerOperations -->", "Problema de cifrado: " + pn, e);
+        }
+
+        String ConstURLCreate = Constants.SERVER_URL + Constants.CONTROLLER_AVISO_DELETE + cifrado;
+
+        String textRead = "";
+
+        //borramos el aviso
+        try {
+            HttpUrlTextRead miUrl = new HttpUrlTextRead(ConstURLCreate);
+            textRead = miUrl.getText();
+        } catch (Exception e) {
+            AppLog.d("ServerOperations -> ", "Error de conexión??");
+        }
+        if (textRead != null) {
+            if (textRead.equals("true")) {
+                AppLog.i("ServerOperations -> ", "Aviso BORRADO: " + textRead);
+                return true;
+            } else {
+                //Toast.makeText(getApplicationContext(), "No hay alarmas activas", Toast.LENGTH_SHORT).show();
+                AppLog.i("ServerOperations -> ", "Error borrando aviso: " + textRead);
+                return false;
+            }
+        }
+        AppLog.i("ServerOperations -> ", "ERROR texRead = " + textRead);
+        return false;
+    }
+
 }
-
