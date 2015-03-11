@@ -86,6 +86,7 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
                     Intent mainIntent;
                     mainIntent = new Intent().setClass(actLoadingScreen.this, actMain.class);
                     startActivity(mainIntent);
+                    overridePendingTransition(R.animator.animation1, R.animator.animation2);
 
                     // Cerramos la ventana de carga para que salga del BackStack
                     finish();
