@@ -36,7 +36,7 @@ public class actMain extends ActionBarActivity implements Constants {
         setContentView(R.layout.layout_main);
 
         //Personalizamos el ActionBar con icono y el nombre del usuario
-        customizeActionBar();
+        //customizeActionBar();
 
         //Comprobamos si hay un aviso activo
         Boolean retrieveAviso = false;

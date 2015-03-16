@@ -28,7 +28,7 @@ public class PhoneData {
 
         //Recuperamos el número de teléfono
         tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
-        phoneNumber = tm.getLine1Number();
+        phoneNumber = "657894456";//tm.getLine1Number();
 
         if ( phoneNumber.length() == 0) {
             AppLog.e("PhoneData --> ", "Número de teléfono vacío");

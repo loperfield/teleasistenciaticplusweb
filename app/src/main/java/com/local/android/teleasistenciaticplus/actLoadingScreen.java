@@ -1,6 +1,5 @@
 package com.local.android.teleasistenciaticplus;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -43,8 +42,8 @@ public class actLoadingScreen extends ActionBarActivity implements Constants {
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN; // | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
             decorView2.setSystemUiVisibility(uiOptions);
             // Recordar que si se oculta el Status Bar, nunca se deberÃ­a mostrar el ActionBar
-            ActionBar actionBar2 = getActionBar();
-            actionBar2.hide();
+            /*ActionBar actionBar2 = getActionBar();
+            actionBar2.hide();*/
         }
 
         //Creación de la pantalla de carga
